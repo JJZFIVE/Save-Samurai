@@ -24,18 +24,17 @@ export default function Home() {
 		<div className={darkMode ? "bg-gray-900 text-white bp3-dark" : "bg-white text-black"}>
 			<div className="w-full h-screen flex flex-col items-center justify-center">
 				<h1 className="text-6xl text-center mb-4 font-semibold">Budgeting Made Accessible</h1>
-				<h2 className="text-4xl text-center mb-6">Upload your own financial history or test our product with a fictional profile</h2>
+				<h2 className="text-4xl text-center mb-6 w-1/2 pb-12">Upload your own financial history or test our product with a fictional profile</h2>
 				<p className="text-xl text-center p-6">
-            placeholder for now
 				</p>
 				<UserUpload />
         
 				<Divider darkMode={darkMode} />
 
 				<div className="flex w-full justify-between px-48 my-0" style = {{margin:-16}}>
-					<SampleUpload text={"John is a 24 year old software engineer who loves fitness gadgets and the outdoors"} />
+					<SampleUpload text={"John, a 24 year old software engineer,loves fitness gadgets and the outdoors"} />
 					<SampleUpload text={"Tina, a 28-year-old marketer, is all about mindfulness"} />
-					<SampleUpload text={"Dani is a 20 year old Duke student who just might be getting Alpaca a little too often"} />
+					<SampleUpload text={"Dani, a 20 year old Duke student, might just might be getting Alpaca a little too often"} />
 				</div>
 			</div>
 		</div>

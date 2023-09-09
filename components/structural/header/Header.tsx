@@ -23,13 +23,13 @@ const Header: React.FC<Props> = ({ className }) => {
 	return (
 		<Navbar className={`${className} .header-banner-class-name`} style = {{width:"100vw", marginLeft:0, backgroundColor: darkMode ? "" : "#ABB3BF"}}>
 			<Navbar.Group align={Alignment.LEFT} className={`${className } background`}>
-				<Navbar.Heading  style = {{marginRight:0}}>
+				<Navbar.Heading  style = {{marginRight:0, fontWeight:700}}>
 					{/* <a href=""" className='lab-link'> */}
-                Savings Samuri
+                SaveSamurai
 					{/* </a> */}
 				</Navbar.Heading>
 				<Navbar.Divider />
-				<Navbar.Heading className='custom-title'> Slash Your Spending</Navbar.Heading>
+				<Navbar.Heading style = {{fontSize:12, marginLeft:0}}> Slash Your Spending</Navbar.Heading>
 			</Navbar.Group>
 			<Navbar.Group align={Alignment.RIGHT}>
 				<Button className="bp5-minimal" icon={darkMode ? "flash" : "moon"} text={darkMode ? "Light Mode" : "Dark Mode"} onClick={() => toggleDarkMode()}/>

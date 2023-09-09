@@ -9,7 +9,7 @@ interface FileCardProps {
 
 const SampleUpload: React.FC<FileCardProps> = ({ text, onClick }) => {
 	return (
-		<Card interactive={true} elevation={Elevation.TWO} onClick={onClick} className="flex flex-col items-center justify-center p-8 m-12 w-60">
+		<Card interactive={true} elevation={Elevation.TWO} onClick={onClick} className="flex flex-col items-center justify-center p-6 m-12 w-48">
 			<Icon icon={IconNames.DOCUMENT} iconSize={40} className="mb-4" />
 			<div className="text-center">
 				{text}
