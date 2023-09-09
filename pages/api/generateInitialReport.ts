@@ -12,6 +12,7 @@ import savingsProcessor from "../../utils/api/savingProcessor";
 import generateCategorySavingsTotals from "../../utils/api/generateCategorySavingsTotals";
 import generateChronologicalData from "../../utils/api/generateChronologicalData";
 import generateMainReport from "../../utils/api/generateMainReport";
+import { MAX_TRANSACTIONS } from "../../utils/constants";
 
 // categoryGroupedData: {}; // all data grouped by category. key: category
 // categoryTotalsData: {}; // total amounts by category
@@ -34,11 +35,11 @@ export default async function handler(
     if (!inputData || !inputData.rawData || !inputData?.rawData?.length)
       throw new Error("No input data");
 
-    const rawSpendEntries = inputData.rawData;
+    const rawSpendEntries = inputData.rawData.slice(0, MAX_TRANSACTIONS);
 
     // check integrity of the data, like in the right format
 
-    // TODO: categorize with GPT
+    // Categorize with GPT
     const spendsWithCategories: SpendEntryWithCategory[] =
       await categorizerProcessor({ rawSpendEntries });
 
@@ -61,8 +62,8 @@ export default async function handler(
       spendsWithCategories,
     });
 
-    // TODO: Run through savingsProcessor on categoryGroupedData, save in savingsByCategory
-    const savingsByCategory = await savingsProcessor({ categoryGroupedData });
+    // These are all of the transactions that should be removed, i.e. were bad spends
+    const savingsByCategory = await savingsProcessor({ chronologicalData });
 
     // Calculate categorySavingsTotals from savingsByCategory
     // Done, did not test yet

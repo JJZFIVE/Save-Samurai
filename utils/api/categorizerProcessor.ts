@@ -1,12 +1,12 @@
 import { Category, SpendEntry, SpendEntryWithCategory } from "../../types";
-import { exampleSpendEntryWithCategory } from "./exampleData";
 import { openai } from "../openai";
-import { CATEGORIES, MAX_TRANSACTIONS } from "../constants";
+import { CATEGORIES } from "../constants";
+import { formatTransactionForGPT } from "../formatting";
 
 export default async function categorizerProcessor({
   rawSpendEntries,
 }: {
-  rawSpendEntries: [SpendEntry];
+  rawSpendEntries: SpendEntry[];
 }): Promise<SpendEntryWithCategory[]> {
   // rawSpendEntries are guaranteed to have length
 
@@ -66,24 +66,13 @@ export default async function categorizerProcessor({
 const formatCategorizerProcessorPrompt = ({
   rawSpendEntries,
 }: {
-  rawSpendEntries: [SpendEntry];
+  rawSpendEntries: SpendEntry[];
 }): string => {
   const prompt = `You are a helpful assistant. Below is a list of credit card transactions:
 
-${rawSpendEntries
-  .slice(0, MAX_TRANSACTIONS)
-  .map(
-    (spend, index) =>
-      "" +
-      index +
-      ") " +
-      "TITLE: " +
-      spend.title +
-      ", " +
-      "AMOUNT: $" +
-      spend.amount +
-      "\n"
-  )}
+${rawSpendEntries.map((transaction, i) =>
+  formatTransactionForGPT({ i, transaction })
+)}
 
 Your job is to categorize each transaction into one of the given categories. 
 
