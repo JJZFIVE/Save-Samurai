@@ -41,7 +41,8 @@ export default async function handler(
     const spendsWithCategories: [SpendEntryWithCategory] =
       await categorizerProcessor({ rawSpendEntries });
 
-    // TODO: group all of the data and store in object called categoryGroupedData
+    // Group all of the data and store in object called categoryGroupedData
+    // Done, haven't tested
     const categoryGroupedData = generateCategoryGroupedData({
       spendsWithCategories,
     });
