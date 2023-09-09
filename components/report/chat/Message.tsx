@@ -21,12 +21,12 @@ const Message: React.FC<MessageProps> = ({ text, sender }) => {
 			? darkMode ? "bg-gray-700 text-white relative" : "bg-white text-gray-900 relative"
 			: darkMode ? "bg-gray-800 text-white relative" : "bg-gray-200 text-gray-900 relative";
 
-	const indicatorIcon = sender === Sender.USER ? "user" : "people";
+	const indicatorIcon = sender === Sender.USER ? "user" : "ninja";
 
 	return (
 		<div className={`p-4 m-1 rounded ${messageClass}`}>
 			{text}
-			<span className="absolute top-1 right-3">
+			<span className="absolute top-1 right-2">
 				<Icon icon={indicatorIcon} className="bp3-icon-sm" />
 			</span>
 		</div>
