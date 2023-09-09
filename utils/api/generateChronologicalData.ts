@@ -6,6 +6,7 @@ export default function generateChronologicalData({
   spendsWithCategories: SpendEntryWithCategory[];
 }): SpendEntryWithCategory[] {
   return spendsWithCategories.sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
+    // @ts-ignore
+    (a, b) => new Date(a.date) - new Date(b.date)
   );
 }

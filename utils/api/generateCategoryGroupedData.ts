@@ -4,7 +4,7 @@ import { CATEGORIES } from "../constants";
 export default function generateCategoryGroupedData({
   spendsWithCategories,
 }: {
-  spendsWithCategories: [SpendEntryWithCategory];
+  spendsWithCategories: SpendEntryWithCategory[];
 }): { [key in Category]: SpendEntryWithCategory[] | [] } {
   const categoryGroupedData: { [key: string]: SpendEntryWithCategory[] | [] } =
     {};

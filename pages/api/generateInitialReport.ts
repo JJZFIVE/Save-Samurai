@@ -38,8 +38,11 @@ export default async function handler(
 
     // check integrity of the data, like in the right format
 
-    const spendsWithCategories: [SpendEntryWithCategory] =
+    // TODO: categorize with GPT
+    const spendsWithCategories: SpendEntryWithCategory[] =
       await categorizerProcessor({ rawSpendEntries });
+
+    console.log("spendsWithCategories", spendsWithCategories);
 
     // Group all of the data and store in object called categoryGroupedData
     // Done, haven't tested

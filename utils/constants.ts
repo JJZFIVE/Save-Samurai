@@ -10,3 +10,5 @@ export const CATEGORIES = [
   "Transportation",
   "Other",
 ];
+
+export const MAX_TRANSACTIONS = 250;
