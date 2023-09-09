@@ -39,7 +39,16 @@ export default async function generateMainReport({
 
   console.log("main report response: ", completion.choices[0].message.content);
 
-  return "Example report";
+  const output = completion?.choices?.[0]?.["message"]?.["content"];
+
+  try {
+    if (!output) throw "No response from GPT4 for Main Report";
+
+    return output;
+  } catch (error) {
+    console.error(error);
+    return "Error generating report";
+  }
 }
 
 const formatMainReportPrompt = ({
@@ -77,7 +86,7 @@ const formatMainReportPrompt = ({
     {}
   );
 
-  const prompt = `You are SaveSamurai, my helpful financial assistant. You are generating a report on my credit card transaction history, with an emphasis on areas where I can save money and cut back on extraneous spending. Below is a list of credit card transactions:
+  const prompt = `You are SaveSamurai, my helpful financial assistant. Do not address me by name. You are generating a report on my credit card transaction history, with an emphasis on areas where I can save money and cut back on extraneous spending. Speak to me professionally but colloquially. Below is a list of credit card transactions:
 
 ${chronologicalData.map((transaction, i) =>
   formatTransactionForGPT({ i, transaction })
