@@ -38,41 +38,41 @@ import React, { createContext, useContext, useState } from "react";
 
 const GlobalStateContext = createContext<GlobalStateType | undefined>(undefined);
 const GlobalDispatchContext = createContext<((state: Partial<GlobalStateType>) => void) | undefined>(
-  undefined
+	undefined
 );
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
-  const [state, setState] = useState<GlobalStateType>({
-    darkMode: false,
-    loading: false,
-    report: null,
-  });
+	const [state, setState] = useState<GlobalStateType>({
+		darkMode: false,
+		loading: false,
+		report: null,
+	});
 
-  const setGlobalState = (updatedState: Partial<GlobalStateType>) => {
-    setState((prev) => ({ ...prev, ...updatedState }));
-  };
+	const setGlobalState = (updatedState: Partial<GlobalStateType>) => {
+		setState((prev) => ({ ...prev, ...updatedState }));
+	};
 
-  return (
-    <GlobalStateContext.Provider value={state}>
-      <GlobalDispatchContext.Provider value={setGlobalState}>
-        {children}
-      </GlobalDispatchContext.Provider>
-    </GlobalStateContext.Provider>
-  );
+	return (
+		<GlobalStateContext.Provider value={state}>
+			<GlobalDispatchContext.Provider value={setGlobalState}>
+				{children}
+			</GlobalDispatchContext.Provider>
+		</GlobalStateContext.Provider>
+	);
 };
 
 export const useGlobalState = () => {
-  const context = useContext(GlobalStateContext);
-  if (context === undefined) {
-    throw new Error("useGlobalState must be used within a GlobalProvider");
-  }
-  return context;
+	const context = useContext(GlobalStateContext);
+	if (context === undefined) {
+		throw new Error("useGlobalState must be used within a GlobalProvider");
+	}
+	return context;
 };
 
 export const useSetGlobalState = () => {
-  const context = useContext(GlobalDispatchContext);
-  if (context === undefined) {
-    throw new Error("useSetGlobalState must be used within a GlobalProvider");
-  }
-  return context;
+	const context = useContext(GlobalDispatchContext);
+	if (context === undefined) {
+		throw new Error("useSetGlobalState must be used within a GlobalProvider");
+	}
+	return context;
 };
