@@ -3,7 +3,7 @@ import { Category, SpendEntryWithCategory } from "../../types";
 export default function generateCategorySavingsTotals({
   savingsByCategory,
 }: {
-  savingsByCategory: { [key in Category]: [SpendEntryWithCategory?] };
+  savingsByCategory: { [key in Category]: SpendEntryWithCategory[] | [] };
 }): { [key in Category]: number } {
   const categories = Object.keys(savingsByCategory);
 

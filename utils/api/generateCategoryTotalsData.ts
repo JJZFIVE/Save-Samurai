@@ -3,7 +3,7 @@ import { Category, SpendEntryWithCategory } from "../../types";
 export default function generateCategoryTotalsData({
   categoryGroupedData,
 }: {
-  categoryGroupedData: { [key in Category]: [SpendEntryWithCategory?] };
+  categoryGroupedData: { [key in Category]: SpendEntryWithCategory[] | [] };
 }): { [key in Category]: number } {
   const categories = Object.keys(categoryGroupedData);
 

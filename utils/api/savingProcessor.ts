@@ -5,8 +5,8 @@ import { exampleSpendEntryWithCategory } from "./exampleData";
 export default async function savingsProcessor({
   categoryGroupedData,
 }: {
-  categoryGroupedData: { [key in Category]: [SpendEntryWithCategory?] };
-}): Promise<{ [key in Category]: [SpendEntryWithCategory?] }> {
+  categoryGroupedData: { [key in Category]: SpendEntryWithCategory[] | [] };
+}): Promise<{ [key in Category]: SpendEntryWithCategory[] | [] }> {
   // format prompt into savings processor
 
   // feed into openai

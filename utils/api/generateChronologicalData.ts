@@ -5,7 +5,7 @@ import { exampleSpendEntryWithCategory } from "./exampleData";
 export default function generateChronologicalData({
   spendsWithCategories,
 }: {
-  spendsWithCategories: [SpendEntryWithCategory];
-}): [SpendEntryWithCategory?] {
+  spendsWithCategories: SpendEntryWithCategory[];
+}): SpendEntryWithCategory[] | [] {
   return [exampleSpendEntryWithCategory("Groceries")];
 }

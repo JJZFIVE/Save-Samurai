@@ -9,13 +9,13 @@ export default async function generateMainReport({
   savingsByCategory,
   categorySavingsTotals,
 }: {
-  categoryGroupedData: { [key in Category]: [SpendEntryWithCategory?] };
+  categoryGroupedData: { [key in Category]: SpendEntryWithCategory[] | [] };
   categoryTotalsData: {
     [key in Category]: number;
   };
-  chronologicalData: [SpendEntryWithCategory?];
+  chronologicalData: SpendEntryWithCategory[] | [];
   savingsByCategory: {
-    [key in Category]: [SpendEntryWithCategory?];
+    [key in Category]: SpendEntryWithCategory[] | [];
   };
   categorySavingsTotals: {
     [key in Category]: number;

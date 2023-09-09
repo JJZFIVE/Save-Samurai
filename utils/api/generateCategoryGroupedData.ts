@@ -6,7 +6,7 @@ export default function generateCategoryGroupedData({
   spendsWithCategories,
 }: {
   spendsWithCategories: [SpendEntryWithCategory];
-}): { [key in Category]: [SpendEntryWithCategory?] } {
+}): { [key in Category]: SpendEntryWithCategory[] | [] } {
   return {
     Groceries: [exampleSpendEntryWithCategory("Groceries")],
     Restaurant: [exampleSpendEntryWithCategory("Restaurant")],

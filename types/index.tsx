@@ -19,14 +19,14 @@ export type GenerateInitialReportInput = {
 
 export type GenerateInitialReportReturn = {
   categoryGroupedData: {
-    [key in Category]: [SpendEntryWithCategory?];
+    [key in Category]: SpendEntryWithCategory[] | [];
   };
   categoryTotalsData: {
     [key in Category]: number;
   };
-  chronologicalData: [SpendEntryWithCategory?];
+  chronologicalData: SpendEntryWithCategory[] | [];
   savingsByCategory: {
-    [key in Category]: [SpendEntryWithCategory?];
+    [key in Category]: SpendEntryWithCategory[] | [];
   };
   categorySavingsTotals: {
     [key in Category]: number;
