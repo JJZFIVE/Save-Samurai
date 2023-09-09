@@ -53,7 +53,7 @@ export default async function handler(
       categoryGroupedData,
     });
 
-    // TODO: Sort by chronological order
+    // Sort by chronological order
     const chronologicalData = generateChronologicalData({
       spendsWithCategories,
     });

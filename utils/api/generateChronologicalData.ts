@@ -1,11 +1,11 @@
-import { Category, SpendEntryWithCategory } from "../../types";
-import { exampleSpendEntryWithCategory } from "./exampleData";
+import { SpendEntryWithCategory } from "../../types";
 
-// TODO
 export default function generateChronologicalData({
   spendsWithCategories,
 }: {
   spendsWithCategories: SpendEntryWithCategory[];
-}): SpendEntryWithCategory[] | [] {
-  return [exampleSpendEntryWithCategory("Groceries")];
+}): SpendEntryWithCategory[] {
+  return spendsWithCategories.sort(
+    (a, b) => a.date.getTime() - b.date.getTime()
+  );
 }
