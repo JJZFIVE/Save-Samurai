@@ -1,12 +1,31 @@
 import { Category, SpendEntryWithCategory } from "../../types";
-import { exampleSpendEntryWithCategory } from "./exampleData";
 
-// TODO
 export default function generateCategoryTotalsData({
   categoryGroupedData,
 }: {
   categoryGroupedData: { [key in Category]: [SpendEntryWithCategory?] };
 }): { [key in Category]: number } {
+  const categories = Object.keys(categoryGroupedData);
+
+  // Initialize totals with all categories set to 0
+  const totals: { [key in Category]: number } = categories.reduce(
+    (acc, category) => {
+      acc[category as Category] = 0.0;
+      return acc;
+    },
+    {} as { [key in Category]: number }
+  );
+
+  // Iterate through categoryGroupedData and accumulate the amounts
+  for (const category of categories) {
+    for (const entry of categoryGroupedData[category as Category]) {
+      totals[category as Category] += entry?.amount || 0;
+    }
+  }
+
+  return totals;
+
+  /* 
   return {
     Groceries: 140.23,
     Restaurant: 140.23,
@@ -19,4 +38,5 @@ export default function generateCategoryTotalsData({
     Transportation: 140.23,
     Other: 140.23,
   };
+  */
 }
