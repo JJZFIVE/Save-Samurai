@@ -46,7 +46,8 @@ export default async function handler(
       spendsWithCategories,
     });
 
-    // TODO: Calclate totals of categoryGroupedData and store in categoryTotalsData
+    // Calclate totals of categoryGroupedData and store in categoryTotalsData
+    // Done, did not test yet
     const categoryTotalsData = generateCategoryTotalsData({
       categoryGroupedData,
     });
@@ -59,7 +60,8 @@ export default async function handler(
     // TODO: Run through savingsProcessor on categoryGroupedData, save in savingsByCategory
     const savingsByCategory = await savingsProcessor({ categoryGroupedData });
 
-    // TODO: Calculate categorySavingsTotals from savingsByCategory
+    // Calculate categorySavingsTotals from savingsByCategory
+    // Done, did not test yet
     const categorySavingsTotals = generateCategorySavingsTotals({
       savingsByCategory,
     });
