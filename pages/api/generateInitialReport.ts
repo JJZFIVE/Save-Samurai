@@ -6,7 +6,12 @@ import {
   SpendEntryWithCategory,
 } from "../../types";
 import categorizerProcessor from "../../utils/api/categorizerProcessor";
-import { exampleSpendEntryWithCategory } from "../../utils/api/exampleData";
+import generateCategoryGroupedData from "../../utils/api/generateCategoryGroupedData";
+import generateCategoryTotalsData from "../../utils/api/generateCategoryTotalsData";
+import savingsProcessor from "../../utils/api/savingProcessor";
+import generateCategorySavingsTotals from "../../utils/api/generateCategorySavingsTotals";
+import generateChronologicalData from "../../utils/api/generateChronologicalData";
+import generateMainReport from "../../utils/api/generateMainReport";
 
 // categoryGroupedData: {}; // all data grouped by category. key: category
 // categoryTotalsData: {}; // total amounts by category
@@ -37,64 +42,48 @@ export default async function handler(
       await categorizerProcessor({ rawSpendEntries });
 
     // TODO: group all of the data and store in object called categoryGroupedData
+    const categoryGroupedData = generateCategoryGroupedData({
+      spendsWithCategories,
+    });
+
     // TODO: Calclate totals of categoryGroupedData and store in categoryTotalsData
+    const categoryTotalsData = generateCategoryTotalsData({
+      categoryGroupedData,
+    });
+
+    // TODO: Sort by chronological order
+    const chronologicalData = generateChronologicalData({
+      spendsWithCategories,
+    });
+
     // TODO: Run through savingsProcessor on categoryGroupedData, save in savingsByCategory
+    const savingsByCategory = await savingsProcessor({ categoryGroupedData });
+
     // TODO: Calculate categorySavingsTotals from savingsByCategory
+    const categorySavingsTotals = generateCategorySavingsTotals({
+      savingsByCategory,
+    });
+
     // TODO: Run all through giant GPT prompt to generate the report
+    const report = await generateMainReport({
+      categoryGroupedData,
+      categoryTotalsData,
+      chronologicalData,
+      savingsByCategory,
+      categorySavingsTotals,
+    });
+
     // TODO: Format data for graphs if necessary
+    // graph formatting code
 
     return res.status(200).json({
-      categoryGroupedData: {
-        Groceries: [exampleSpendEntryWithCategory("Groceries")],
-        Restaurant: [exampleSpendEntryWithCategory("Restaurant")],
-        Utilities: [exampleSpendEntryWithCategory("Utilities")],
-        Entertainment: [exampleSpendEntryWithCategory("Entertainment")],
-        Health: [exampleSpendEntryWithCategory("Health")],
-        Travel: [exampleSpendEntryWithCategory("Travel")],
-        Shopping: [exampleSpendEntryWithCategory("Shopping")],
-        Education: [exampleSpendEntryWithCategory("Education")],
-        Transportation: [exampleSpendEntryWithCategory("Transportation")],
-        Other: [exampleSpendEntryWithCategory("Other")],
-      },
-      categoryTotalsData: {
-        Groceries: 140.23,
-        Restaurant: 140.23,
-        Utilities: 140.23,
-        Entertainment: 140.23,
-        Health: 140.23,
-        Travel: 140.23,
-        Shopping: 140.23,
-        Education: 140.23,
-        Transportation: 140.23,
-        Other: 140.23,
-      },
-      chronologicalData: [exampleSpendEntryWithCategory("Groceries")],
-      savingsByCategory: {
-        Groceries: [exampleSpendEntryWithCategory("Groceries")],
-        Restaurant: [exampleSpendEntryWithCategory("Restaurant")],
-        Utilities: [exampleSpendEntryWithCategory("Utilities")],
-        Entertainment: [exampleSpendEntryWithCategory("Entertainment")],
-        Health: [exampleSpendEntryWithCategory("Health")],
-        Travel: [exampleSpendEntryWithCategory("Travel")],
-        Shopping: [exampleSpendEntryWithCategory("Shopping")],
-        Education: [exampleSpendEntryWithCategory("Education")],
-        Transportation: [exampleSpendEntryWithCategory("Transportation")],
-        Other: [exampleSpendEntryWithCategory("Other")],
-      },
-      categorySavingsTotals: {
-        Groceries: 69.42,
-        Restaurant: 69.42,
-        Utilities: 69.42,
-        Entertainment: 69.42,
-        Health: 69.42,
-        Travel: 69.42,
-        Shopping: 69.42,
-        Education: 69.42,
-        Transportation: 69.42,
-        Other: 69.42,
-      },
+      categoryGroupedData,
+      categoryTotalsData,
+      chronologicalData,
+      savingsByCategory,
+      categorySavingsTotals,
       chat: {
-        report: "Example report",
+        report,
       },
       graphs: {},
     });

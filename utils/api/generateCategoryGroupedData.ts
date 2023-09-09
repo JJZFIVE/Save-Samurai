@@ -2,15 +2,11 @@ import { Category, SpendEntryWithCategory } from "../../types";
 import { exampleSpendEntryWithCategory } from "./exampleData";
 
 // TODO
-export default async function savingsProcessor({
-  categoryGroupedData,
+export default function generateCategoryGroupedData({
+  spendsWithCategories,
 }: {
-  categoryGroupedData: { [key in Category]: [SpendEntryWithCategory?] };
-}): Promise<{ [key in Category]: [SpendEntryWithCategory?] }> {
-  // format prompt into savings processor
-
-  // feed into openai
-
+  spendsWithCategories: [SpendEntryWithCategory];
+}): { [key in Category]: [SpendEntryWithCategory?] } {
   return {
     Groceries: [exampleSpendEntryWithCategory("Groceries")],
     Restaurant: [exampleSpendEntryWithCategory("Restaurant")],
