@@ -27,18 +27,11 @@ export default async function savingsProcessor({
 
   const prompt = formatSavingsProcessorPrompt({ chronologicalData });
 
-  console.log("savings processor prompt: ", prompt);
-
   // feed into openai
   const completion = await openai.chat.completions.create({
     messages: [{ role: "user", content: prompt }],
     model: "gpt-4",
   });
-
-  console.log(
-    "savings processor output",
-    completion?.choices?.[0]?.["message"]?.["content"]
-  );
 
   try {
     if (!completion?.choices?.[0]?.["message"]?.["content"])

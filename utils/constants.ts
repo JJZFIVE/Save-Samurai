@@ -11,4 +11,4 @@ export const CATEGORIES = [
   "Other",
 ];
 
-export const MAX_TRANSACTIONS = 250;
+export const MAX_TRANSACTIONS = 150;
