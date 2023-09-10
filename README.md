@@ -1,6 +1,6 @@
 # SaveSamurai :dollar: :crossed_swords:
 
-Breaking down the barrier to financial freedom.
+Breaking down the barrier to financial freedom.[ Try it yourself](https://www.savesamurai.com)
 
 ## :warning: The Problem
 
