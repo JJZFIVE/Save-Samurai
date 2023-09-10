@@ -14,9 +14,10 @@ type GlobalProviderProps = {
 
 // Global State Type
 type GlobalStateType = {
-    darkMode: boolean;
-    loading: boolean;
-    report: GenerateInitialReportReturn | null;
+  darkMode: boolean;
+  loading: boolean;
+  loadingChat: boolean;
+  report: GenerateInitialReportReturn | null;
 };
 
 import React, { createContext, useContext, useState } from 'react';
@@ -30,11 +31,12 @@ const GlobalDispatchContext = createContext<
 >(undefined);
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
-    const [state, setState] = useState<GlobalStateType>({
-        darkMode: false,
-        loading: false,
-        report: null
-    });
+	const [state, setState] = useState<GlobalStateType>({
+		darkMode: false,
+		loading: false,
+		report: null,
+		loadingChat: false,
+	});
 
     const setGlobalState = (updatedState: Partial<GlobalStateType>) => {
         setState((prev) => ({ ...prev, ...updatedState }));
