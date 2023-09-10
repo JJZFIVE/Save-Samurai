@@ -25,7 +25,7 @@ const Message: React.FC<MessageProps> = ({ text, sender }) => {
 
 	return (
 		<div className={`p-4 m-1 rounded ${messageClass}`}>
-			{text}
+			<p style={{ whiteSpace: 'pre-line' }}>{text}</p>
 			<span className="absolute top-1 right-2">
 				<Icon icon={indicatorIcon} className="bp3-icon-sm" />
 			</span>

@@ -79,7 +79,7 @@ const TextEntry: React.FC<TextEntryProps> = ({ onSubmit }) => {
 			
 			
 			{chatHistory[chatHistory.length - 1].role == "user" ? 
-				<div style = {{right:12, position:'absolute', bottom:6}}>
+				<div style = {{right:12, position:"absolute", bottom:6}}>
 					<Spinner size={20} />
 				</div>:
 				<Button
