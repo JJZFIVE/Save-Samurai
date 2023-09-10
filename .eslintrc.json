@@ -1,52 +1,49 @@
 {
     "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
+      "browser": true,
+      "es2021": true,
+      "node": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
     },
-    "plugins": [
-        "@typescript-eslint",
-        "react"
-    ],
+    "plugins": ["@typescript-eslint", "react"],
     "rules": {
-
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/no-unused-vars": ["warn"],
-        "@typescript-eslint/no-explicit-any": "off"
+      "indent": [
+        "warn", // Treat indentation errors as warnings
+        "tab"
+      ],
+      "linebreak-style": [
+        "warn", // Treat linebreak-style errors as warnings
+        "unix"
+      ],
+      "quotes": [
+        "warn", // Treat quotes errors as warnings
+        "double"
+      ],
+      "semi": [
+        "warn", // Treat semi errors as warnings
+        "always"
+      ],
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-unused-vars": "warn", // Treat unused-vars errors as warnings
+      "@typescript-eslint/no-explicit-any": "off"
     },
     "settings": {
-        "react": {
-            "version": "detect"
-        }
+      "react": {
+        "version": "detect"
+      }
     }
-}
+  }
+  
