@@ -14,7 +14,6 @@ enum Sender {
 
 const Message: React.FC<MessageProps> = ({ text, sender }) => {
 	const { darkMode } = useGlobalState();
-
 	// Decide the classes based on sender and dark mode
 	const messageClass =
 		sender === Sender.USER
