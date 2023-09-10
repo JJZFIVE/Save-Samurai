@@ -13,6 +13,7 @@ import generateCategorySavingsTotals from "../../utils/api/generateCategorySavin
 import generateChronologicalData from "../../utils/api/generateChronologicalData";
 import generateMainReport from "../../utils/api/generateMainReport";
 import { MAX_TRANSACTIONS } from "../../utils/constants";
+import graphData from "../../utils/api/graphData";
 
 // categoryGroupedData: {}; // all data grouped by category. key: category
 // categoryTotalsData: {}; // total amounts by category
@@ -69,17 +70,24 @@ export default async function handler(
       savingsByCategory,
     });
 
-    // TODO: Run all through giant GPT prompt to generate the report
-    const report = await generateMainReport({
+    // Run all through giant GPT prompt to generate the report
+    const report = "main report here...";
+    // const report = await generateMainReport({
+    //   categoryGroupedData,
+    //   categoryTotalsData,
+    //   chronologicalData,
+    //   savingsByCategory,
+    //   categorySavingsTotals,
+    // });
+
+    // Graph formatting code
+    const graphs = graphData({
       categoryGroupedData,
       categoryTotalsData,
       chronologicalData,
       savingsByCategory,
       categorySavingsTotals,
     });
-
-    // TODO: Format data for graphs if necessary
-    // graph formatting code
 
     return res.status(200).json({
       categoryGroupedData,
@@ -90,7 +98,7 @@ export default async function handler(
       chat: {
         report,
       },
-      graphs: {},
+      graphs,
     });
   } catch (error) {
     console.error("Error parsing request body:", error);
@@ -147,7 +155,6 @@ export default async function handler(
       chat: {
         report: "",
       },
-      graphs: {},
       error: {
         valid: true,
         message: "Invalid request body",

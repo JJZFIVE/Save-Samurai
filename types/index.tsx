@@ -34,7 +34,18 @@ export type GenerateInitialReportReturn = {
   chat: {
     report: string;
   };
-  graphs: {};
+  graphs?: {
+    radar: {
+      category: Category;
+      totalSpending: number;
+      reducedSpending: number;
+    }[];
+    xy: {
+      date: Date; // "2022-01-01";
+      totalSpend: number;
+      decreasedSpend: number;
+    }[];
+  };
   error?: {
     valid: boolean;
     message: string;
