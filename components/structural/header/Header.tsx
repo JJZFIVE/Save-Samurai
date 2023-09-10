@@ -6,6 +6,7 @@ import {
 	useGlobalState,
 	useSetGlobalState
 } from "../../../contexts/GlobalState";
+import { useRouter } from "next/router";
 
 // import ProjectInfoPopup from '../Modals/ProjectInfoPopover';
 
@@ -22,6 +23,11 @@ const Header: React.FC<Props> = ({ className }) => {
 	const toggleDarkMode = () => {
 		setGlobalState({ ...state, darkMode: !darkMode });
 	};
+	const router = useRouter();
+	const goToAbout = () => {
+		router.push("/about");
+	};
+
 
 	return (
 		<Navbar
@@ -36,7 +42,7 @@ const Header: React.FC<Props> = ({ className }) => {
 				align={Alignment.LEFT}
 				className={`${className} background`}
 			>
-				<Navbar.Heading style={{ marginRight: 0, fontWeight: 700 }}>
+				<Navbar.Heading style={{ marginRight: 0, fontWeight: 700 }}  onClick={() => window.location.reload()}>
 					{/* <a href=""" className='lab-link'> */}
                     SaveSamurai
 					{/* </a> */}
@@ -58,7 +64,7 @@ const Header: React.FC<Props> = ({ className }) => {
 					className="bp5-minimal"
 					icon="info-sign"
 					text="About"
-					onClick={() => setIsOpen(true)}
+					onClick={goToAbout}
 				/>
 			</Navbar.Group>
 		</Navbar>
