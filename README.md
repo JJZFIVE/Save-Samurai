@@ -30,12 +30,10 @@ Introducing **SaveSamurai**, a powerful financial tool designed to:
 
 ## :busts_in_silhouette: Creators
 
-**Adar Schwarzbach** 
-CS @ Duke & Class '25
+**Adar Schwarzbach:** CS @ Duke & Class '25
 - [LinkedIn](https://www.linkedin.com/in/adarschwarzbach/)
 - [GitHub](https://github.com/adarschwarzbach)
 
-**Joe Zakielarz**
-MechE/CS @ Duke & Class '24
+**Joe Zakielarz:** MechE/CS @ Duke & Class '24
 - [Joe's Website](https://www.joezakielarz.com/)
 - [GitHub](https://github.com/JJZFIVE)
