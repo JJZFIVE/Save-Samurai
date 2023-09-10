@@ -29,15 +29,11 @@ export default async function generateMainReport({
     categorySavingsTotals,
   });
 
-  console.log("main report PROMPT: ", prompt.length, prompt);
-
   // feed into openai
   const completion = await openai.chat.completions.create({
     messages: [{ role: "user", content: prompt }],
     model: "gpt-3.5-turbo",
   });
-
-  console.log("main report response: ", completion.choices[0].message.content);
 
   const output = completion?.choices?.[0]?.["message"]?.["content"];
 
