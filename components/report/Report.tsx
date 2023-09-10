@@ -15,11 +15,11 @@ export default function Report() {
 	const state = useGlobalState();
 	const { darkMode } = state;
 	return (
-		<div style={{ display: "flex" }} className= {darkMode ? "bg-bp-light-gray1 text-white bp3-dark" : "bg-white text-black"}>
+		<div style={{ display: "flex", }} className= {darkMode ? "bg-bp-light-gray1 text-white bp3-dark" : "bg-white text-black"}>
 			<div style={{ flex: 1, margin: "1%", border: "0px solid black", height: "100vh" }}>
 				<ChatContainer darkMode={darkMode} />
 			</div>
-			<div style={{ flex: 1, margin: "1%", border: "1px solid black", height: "100vh" }}>
+			<div style={{ flex: 1, margin: "1%", border: "0px solid black", height: "100vh" }}>
 				<GraphContianer />
 			</div>
 		</div>
