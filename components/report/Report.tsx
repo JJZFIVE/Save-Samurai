@@ -3,6 +3,7 @@ import Message from "./chat/Message";
 import TextEntry from "./chat/TextEntry";
 import { useGlobalState, useSetGlobalState } from "../../contexts/GlobalState";
 import ChatContainer from "./chat/ChatContainer";
+import GraphContianer from "./graphs/GraphContainer";
 
 enum Sender {
     ADVISOR = "advisor",
@@ -19,7 +20,7 @@ export default function Report() {
 				<ChatContainer darkMode={darkMode} />
 			</div>
 			<div style={{ flex: 1, margin: "1%", border: "1px solid black", height: "100vh" }}>
-				Right Div
+				<GraphContianer />
 			</div>
 		</div>
 	);
