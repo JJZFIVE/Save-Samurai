@@ -29,6 +29,7 @@ type GenerateInitialReportReturn = {
 type GlobalStateType = {
   darkMode: boolean;
   loading: boolean;
+  loadingChat: boolean;
   report: GenerateInitialReportReturn | null;
 };
 
@@ -46,6 +47,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 		darkMode: false,
 		loading: false,
 		report: null,
+		loadingChat: false,
 	});
 
 	const setGlobalState = (updatedState: Partial<GlobalStateType>) => {

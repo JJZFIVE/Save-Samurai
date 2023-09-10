@@ -21,7 +21,7 @@ export default function MainEntry() {
 			style={{ width: "100vw", maxHeight: "100vh", overflow: "hidden" }}
 		>
 			<Header />{
-				report ?
+				!report ?
 					<Report />
 					:
 					<Home />}
