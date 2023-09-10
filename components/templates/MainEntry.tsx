@@ -1,3 +1,4 @@
+
 import Header from "../structural/header/Header";
 import React from "react";
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -7,9 +8,17 @@ import Report from "../report/Report";
 import LoadingScreen from "../home/Loading";
 
 export default function MainEntry() {
-	const state = useGlobalState();
-	const { darkMode, loading, report } = state;
-
+    const state = useGlobalState();
+    const { darkMode, loading, report } = state;
+    return (
+        <div
+            className={darkMode ? 'bp5-dark' : ''}
+            style={{ width: '100vw', maxHeight: '100vh', overflow: 'hidden' }}
+        >
+            <Header />
+            {report ? <Report /> : <Home />}
+        </div>
+    );
 	if (loading) {
 		return <LoadingScreen />;
 	}

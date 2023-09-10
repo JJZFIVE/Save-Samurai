@@ -22,8 +22,10 @@ export default async function handler(
         return res.status(405).end();
     }
 
+    console.log(req.body.body.rawData);
+
     try {
-        const inputData = req.body as GenerateInitialReportInput;
+        const inputData = req.body.body as GenerateInitialReportInput;
         if (!inputData || !inputData.rawData || !inputData?.rawData?.length)
             throw new Error('No input data');
 
