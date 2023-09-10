@@ -112,7 +112,7 @@ export default function Radar({ width, height, levels = 5, margin = defaultMargi
 
 	return width < 10 ? null : (
 		<svg width={width} height={height}>
-			<rect fill={background} width={width} height={height} rx={14} />
+			<rect fill={background} width={width} height={height - 20} rx={14} />
 			<Group top={height / 2 - margin.top} left={width / 2}>
 				{[...new Array(levels)].map((_, i) => (
 					<LineRadial
