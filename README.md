@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SaveSamurai :dollar: :crossed_swords:
 
-## Getting Started
+Breaking down the barrier to financial freedom.
 
-First, run the development server:
+## :warning: The Problem
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+According to a study by [Bankrate](https://www.bankrate.com/banking/savings/emergency-savings-report/#no-emergency-savings):
+- **22%** of Americans have no emergency savings.
+- **30%** have less than 3 months of savings.
+- **18%** have 3-5 months of savings.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In total, this means a staggering **70%** of Americans have less than 5 months of emergency savings. A key issue contributing to this concerning statistic is a potential lack of understanding of spending habits. Many Americans might not be aware of where their money goes monthly, or how they can optimize their spending to save more without compromising their quality of life.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## :bulb: Our Solution
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Introducing **SaveSamurai**, a powerful financial tool designed to:
+- Analyze your credit/debit card spending history.
+- Provide insightful visualizations about your spending patterns.
+- Generate a written spending report that you can interact with, similar to conversing with a wealth advisor.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## :rocket: Built With
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **TypeScript**
+- **Next.JS**
+- **GPT-4**
+- **Vercel Serverless Functions**
+- **Visx**
+- **Blueprint.js**
+- ... And with a lot of :notes: house music during development!
