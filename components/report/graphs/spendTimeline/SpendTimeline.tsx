@@ -1,130 +1,4 @@
-const data = [
-	{
-		"date": "2023-09-04T11:25:00.000Z",
-		"totalSpend": 10.75,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-05T13:50:00.000Z",
-		"totalSpend": 50.42,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-07T19:45:00.000Z",
-		"totalSpend": 37.49,
-		"decreasedSpend": 11.990000000000002
-	},
-	{
-		"date": "2023-09-08T18:10:00.000Z",
-		"totalSpend": 28.75,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-10T18:55:00.000Z",
-		"totalSpend": 116.75,
-		"decreasedSpend": 116.75
-	},
-	{
-		"date": "2023-09-11T15:55:00.000Z",
-		"totalSpend": 135.89,
-		"decreasedSpend": 135.89
-	},
-	{
-		"date": "2023-09-12T16:45:00.000Z",
-		"totalSpend": 35.62,
-		"decreasedSpend": 35.62
-	},
-	{
-		"date": "2023-09-13T20:40:00.000Z",
-		"totalSpend": 18.25,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-14T12:50:00.000Z",
-		"totalSpend": 27.24,
-		"decreasedSpend": 27.24
-	},
-	{
-		"date": "2023-09-15T10:55:00.000Z",
-		"totalSpend": 22.49,
-		"decreasedSpend": 22.49
-	},
-	{
-		"date": "2023-09-16T08:45:00.000Z",
-		"totalSpend": 62.34,
-		"decreasedSpend": 62.34
-	},
-	{
-		"date": "2023-09-17T19:05:00.000Z",
-		"totalSpend": 56.78,
-		"decreasedSpend": 56.78
-	},
-	{
-		"date": "2023-09-18T09:15:00.000Z",
-		"totalSpend": 78.45,
-		"decreasedSpend": 78.45
-	},
-	{
-		"date": "2023-09-19T10:10:00.000Z",
-		"totalSpend": 14.99,
-		"decreasedSpend": 14.99
-	},
-	{
-		"date": "2023-09-20T20:15:00.000Z",
-		"totalSpend": 171.35,
-		"decreasedSpend": 125.6
-	},
-	{
-		"date": "2023-09-21T15:10:00.000Z",
-		"totalSpend": 159.99,
-		"decreasedSpend": 159.99
-	},
-	{
-		"date": "2023-09-22T19:30:00.000Z",
-		"totalSpend": 356.88,
-		"decreasedSpend": 299.99
-	},
-	{
-		"date": "2023-09-23T14:50:00.000Z",
-		"totalSpend": 749.99,
-		"decreasedSpend": 749.99
-	},
-	{
-		"date": "2023-09-24T17:30:00.000Z",
-		"totalSpend": 72.9,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-25T12:45:00.000Z",
-		"totalSpend": 42.75,
-		"decreasedSpend": 42.75
-	},
-	{
-		"date": "2023-09-26T17:25:00.000Z",
-		"totalSpend": 116.23,
-		"decreasedSpend": 9.990000000000002
-	},
-	{
-		"date": "2023-09-27T12:20:00.000Z",
-		"totalSpend": 55.6,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-28T16:15:00.000Z",
-		"totalSpend": 135.68,
-		"decreasedSpend": 67.23
-	},
-	{
-		"date": "2023-09-29T08:30:00.000Z",
-		"totalSpend": 22.439999999999998,
-		"decreasedSpend": 0
-	},
-	{
-		"date": "2023-09-30T09:40:00.000Z",
-		"totalSpend": 7.99,
-		"decreasedSpend": 0
-	}
-];
+
 
 type TooltipData = {
     date: string;
@@ -161,7 +35,8 @@ const yLabelDy = margin.top / 2 + 8;
 
 export default function SpendTimeline() {
 	const [tooltip, setTooltip] = useState<TooltipState>({ show: false, x: 0, y: 0, data: null });
-	const { darkMode } = useGlobalState();
+	const { darkMode, report } = useGlobalState();
+	const data = report?.graphs?.xy ?? [];
 
 	const accumulatedData = useMemo(() => {
 		let totalSpendAccumulated = 0;
@@ -190,6 +65,7 @@ export default function SpendTimeline() {
 			show: true,
 			x: pointerX,
 			y: event.clientY - event.target.getBoundingClientRect().top,
+			// @ts-ignore
 			data: d
 		});
 	};
@@ -282,7 +158,7 @@ export default function SpendTimeline() {
 
 			{tooltip.show && tooltip.data && (
 				<g transform={`translate(${tooltip.x - tooltipWidth - 10}, ${tooltip.y + 100})`}>
-					<rect x={10} y={-55} width={tooltipWidth} height={60} fill={tooltipBgColor} stroke={axisColor} rx={5} ry={5} />
+					<rect x={10} y={-55} width={tooltipWidth} height={78} fill={tooltipBgColor} stroke={axisColor} rx={5} ry={5} />
 					<text x={15} y={-35} fontSize={12} fill={textColor}>
             Date: {new Date(tooltip.data.date).toLocaleDateString()}
 					</text>
@@ -291,6 +167,9 @@ export default function SpendTimeline() {
 					</text>
 					<text x={15} y={-5} fontSize={12} fill={textColor}>
             Optimized: {tooltip.data.decreasedSpend.toFixed(2)}
+					</text>
+					<text x={15} y={10} fontSize={12} fill={textColor}>
+            Savings: {(tooltip.data.totalSpend - tooltip.data.decreasedSpend).toFixed(2)}
 					</text>
 				</g>
 			)}

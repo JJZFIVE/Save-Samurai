@@ -4,83 +4,8 @@ import { scaleLinear } from "@visx/scale";
 import { Point } from "@visx/point";
 import { Line, LineRadial } from "@visx/shape";
 import "@blueprintjs/core/lib/css/blueprint.css";
+import { useGlobalState } from "../../../../contexts/GlobalState";
 
-
-
-const orange = "#9881F3";
-export const pumpkin = "#634DBF";
-const silver = "#F6F7F9";
-export const background = "#C5CBD3";
-const blue = "#007067";
-const lightblue = "#00A396";
-
-const degrees = 360;
-
-
-const data = [
-	{ category: "Groceries", spending: 100, normalSpending: 70 },
-	{ category: "Restaurant", spending: 100, normalSpending: 29 },
-	{ category: "Utilities", spending: 40, normalSpending: 20 },
-	{ category: "Entertainment", spending: 50, normalSpending: 40 },
-	{ category: "Health", spending: 30, normalSpending: 27 },
-	{ category: "Travel", spending: 40, normalSpending: 40 },
-	{ category: "Shopping", spending: 100, normalSpending: 10 },
-	{ category: "Education", spending: 70, normalSpending: 75 },
-	{ category: "Transportation", spending: 60, normalSpending: 55 },
-	{ category: "Other", spending: 12, normalSpending: 12 },
-];
-const y = (d: { category: string; spending: number; normalSpending: number }) => d?.spending || 0;
-const yNormal = (d: { category: string; spending: number; normalSpending: number }) => d?.normalSpending || 0;
-
-
-const genAngles = (length: number) =>
-	[...new Array(length + 1)].map((_, i) => ({
-		angle: i * (degrees / length) + (length % 2 === 0 ? 0 : degrees / length / 2),
-	}));
-
-const genPoints = (length: number, radius: number) => {
-	const step = (Math.PI * 2) / length;
-	const offset = 4.5 * (Math.PI * 2 / length);  // Adjustment for the 4.5 item offset
-	return [...new Array(length)].map((_, i) => ({
-		x: radius * Math.sin(i * step + Math.PI / 2 + offset),  // Added the offset
-		y: radius * Math.cos(i * step + Math.PI / 2 + offset),
-	}));
-};
-    
-    
-
-function genPolygonPoints<Datum>(
-	dataArray: Datum[],
-	scale: (n: number) => number,
-	getValue: (d: Datum) => number,
-	getValueNormal: (d: Datum) => number,
-) {
-	const step = (Math.PI * 2) / dataArray.length;
-	const points: { x: number; y: number }[] = new Array(dataArray.length).fill({ x: 0, y: 0 });
-	const pointsNormal: { x: number; y: number }[] = new Array(dataArray.length).fill({ x: 0, y: 0 });
-
-	const pointString = new Array(dataArray.length + 1).fill("").reduce((res, _, i) => {
-		if (i > dataArray.length) return res;
-		const xVal = scale(getValue(dataArray[i - 1])) * Math.sin(i * step);
-		const yVal = scale(getValue(dataArray[i - 1])) * Math.cos(i * step);
-		points[i - 1] = { x: xVal, y: yVal };
-		res += `${xVal},${yVal} `;
-		return res;
-	}, "");
-
-	const pointStringNormal = new Array(dataArray.length + 1).fill("").reduce((res, _, i) => {
-		if (i > dataArray.length) return res;
-		const xVal = scale(getValueNormal(dataArray[i - 1])) * Math.sin(i * step);
-		const yVal = scale(getValueNormal(dataArray[i - 1])) * Math.cos(i * step);
-		pointsNormal[i - 1] = { x: xVal, y: yVal };
-		res += `${xVal},${yVal} `;
-		return res;
-	}, "");
-
-	return { points, pointString, pointsNormal, pointStringNormal };
-}
-
-const defaultMargin = { top: 40, left: 80, right: 80, bottom: 80 };
 
 export type RadarProps = {
     width: number;
@@ -89,7 +14,79 @@ export type RadarProps = {
     levels?: number;
 };
 
+const defaultMargin = { top: 40, left: 80, right: 80, bottom: 80 };
+
 export default function Radar({ width, height, levels = 5, margin = defaultMargin }: RadarProps) {
+	const state = useGlobalState();
+	const { report } = state;
+	const data = report?.graphs?.radar ?? [];
+
+
+
+	const orange = "#9881F3";
+	const pumpkin = "#634DBF";
+	const silver = "#F6F7F9";
+	const background = "#C5CBD3";
+	const blue = "#007067";
+	const lightblue = "#00A396";
+
+	const degrees = 360;
+
+
+    const y = (d: { category: string; totalSpending: number; reducedSpending: number }) => d?.totalSpending || 0;
+    // @ts-ignore
+	const yNormal = (d: { category: string; spending: number; normalSpending: number }) => d?.reducedSpending || 0;
+
+
+	const genAngles = (length: number) =>
+		[...new Array(length + 1)].map((_, i) => ({
+			angle: i * (degrees / length) + (length % 2 === 0 ? 0 : degrees / length / 2),
+		}));
+
+	const genPoints = (length: number, radius: number) => {
+		const step = (Math.PI * 2) / length;
+		const offset = 4.5 * (Math.PI * 2 / length);  // Adjustment for the 4.5 item offset
+		return [...new Array(length)].map((_, i) => ({
+			x: radius * Math.sin(i * step + Math.PI / 2 + offset),  // Added the offset
+			y: radius * Math.cos(i * step + Math.PI / 2 + offset),
+		}));
+	};
+    
+    
+
+	function genPolygonPoints<Datum>(
+		dataArray: Datum[],
+		scale: (n: number) => number,
+		getValue: (d: Datum) => number,
+		getValueNormal: (d: Datum) => number,
+	) {
+		const step = (Math.PI * 2) / dataArray.length;
+		const points: { x: number; y: number }[] = new Array(dataArray.length).fill({ x: 0, y: 0 });
+		const pointsNormal: { x: number; y: number }[] = new Array(dataArray.length).fill({ x: 0, y: 0 });
+
+		const pointString = new Array(dataArray.length + 1).fill("").reduce((res, _, i) => {
+			if (i > dataArray.length) return res;
+			const xVal = scale(getValue(dataArray[i - 1])) * Math.sin(i * step);
+			const yVal = scale(getValue(dataArray[i - 1])) * Math.cos(i * step);
+			points[i - 1] = { x: xVal, y: yVal };
+			res += `${xVal},${yVal} `;
+			return res;
+		}, "");
+
+		const pointStringNormal = new Array(dataArray.length + 1).fill("").reduce((res, _, i) => {
+			if (i > dataArray.length) return res;
+			const xVal = scale(getValueNormal(dataArray[i - 1])) * Math.sin(i * step);
+			const yVal = scale(getValueNormal(dataArray[i - 1])) * Math.cos(i * step);
+			pointsNormal[i - 1] = { x: xVal, y: yVal };
+			res += `${xVal},${yVal} `;
+			return res;
+		}, "");
+
+		return { points, pointString, pointsNormal, pointStringNormal };
+	}
+
+
+    
 	const xMax = width - margin.left - margin.right;
 	const yMax = height - margin.top - margin.bottom;
 	const radius = Math.min(xMax, yMax) / 2 + 20;
@@ -100,12 +97,14 @@ export default function Radar({ width, height, levels = 5, margin = defaultMargi
 	});
 
 	const yScale = scaleLinear<number>({
-		range: [0, radius],
+        range: [0, radius],
+         // @ts-ignore
 		domain: [0, Math.max(...data.map(y))],
 	});
 
 	const webs = genAngles(data.length);
 	const points = genPoints(data.length, radius);
+	// @ts-ignore
 	const polygonPoints = genPolygonPoints(data, (d) => yScale(d) ?? 0, y, yNormal);
 	const zeroPoint = new Point({ x: 0, y: 0 });
 

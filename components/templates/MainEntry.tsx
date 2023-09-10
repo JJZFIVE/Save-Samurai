@@ -8,17 +8,10 @@ import Report from "../report/Report";
 import LoadingScreen from "../home/Loading";
 
 export default function MainEntry() {
-    const state = useGlobalState();
-    const { darkMode, loading, report } = state;
-    return (
-        <div
-            className={darkMode ? 'bp5-dark' : ''}
-            style={{ width: '100vw', maxHeight: '100vh', overflow: 'hidden' }}
-        >
-            <Header />
-            {report ? <Report /> : <Home />}
-        </div>
-    );
+	const state = useGlobalState();
+	const { darkMode, loading, report } = state;
+  
+  
 	if (loading) {
 		return <LoadingScreen />;
 	}
@@ -30,7 +23,7 @@ export default function MainEntry() {
 			style={{ width: "100vw", maxHeight: "100vh", overflow: "hidden" }}
 		>
 			<Header />{
-				!report ?
+				report ?
 					<Report />
 					:
 					<Home />}
