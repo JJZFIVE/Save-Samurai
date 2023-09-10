@@ -21,7 +21,7 @@ export default function About() {
 				</div>
 				<Divider />
 				<Text style={{ margin: "20px 0", fontSize: "16px", lineHeight: "1.5", color: "#CED9E0" }}>
-                    According to a study from <a href="https://www.bankrate.com/banking/savings/emergency-savings-report/#no-emergency-savings" style={{ color: "#48AFF0" }}>Bankrate</a>, 70% of Americans have less than 5 months of emergency savings. The primary reason for this could be the lack of understanding about their spending habits. To address this, we've created a unique financial tool.
+                    According to a study from <a href="https://www.bankrate.com/banking/savings/emergency-savings-report/#no-emergency-savings" style={{ color: "#48AFF0" }}>Bankrate</a>, 70% of Americans have less than 5 months of emergency savings. The primary reason for this could be the lack of understanding about their spending habits. To address this, we have created a unique financial tool.
 				</Text>
 
 				<Card elevation={1} className={Classes.DARK} style={{ margin: "20px 0", padding: "20px", backgroundColor: "#394B59" }}>
@@ -51,7 +51,7 @@ export default function About() {
 					<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
 						<H5>Joe Zakielarz</H5>
 						<div>
-							<AnchorButton href="https://www.joezakielarz.com/" icon="link" minimal target="_blank">Joe's Website</AnchorButton>
+							<AnchorButton href="https://www.joezakielarz.com/" icon="link" minimal target="_blank">Joe&apos;s Website</AnchorButton>
 							<AnchorButton href="https://github.com/JJZFIVE" icon="git-merge" minimal target="_blank">GitHub</AnchorButton>
 						</div>
 					</div>
