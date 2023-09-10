@@ -176,7 +176,7 @@ export default function Radar({ width, height, levels = 5, margin = defaultMargi
 					fontSize: "14px", // Font size
 					letterSpacing: "0.025em", // Letter spacing for readability
 				}}>
-                Spending by category
+                Real Spending
 				</text>
 
 				{/* Spending without poor purchases */}
@@ -188,7 +188,7 @@ export default function Radar({ width, height, levels = 5, margin = defaultMargi
 					fontSize: "14px",
 					letterSpacing: "0.025em",
 				}}>
-                Smarter spending
+                Optimized Spending
 				</text>
 			</Group>
 		</svg>
