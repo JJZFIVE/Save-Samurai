@@ -18,6 +18,7 @@ type GlobalStateType = {
   loading: boolean;
   loadingChat: boolean;
   report: GenerateInitialReportReturn | null;
+  chatHistory: { role: string; content: string; }[];
 };
 
 import React, { createContext, useContext, useState } from "react";
@@ -27,8 +28,8 @@ const GlobalStateContext = createContext<GlobalStateType | undefined>(
 	undefined
 );
 const GlobalDispatchContext = createContext<
-    ((state: Partial<GlobalStateType>) => void) | undefined
-	>(undefined);
+    ((state: Partial<GlobalStateType>) => void) | undefined>(undefined);
+
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 	const [state, setState] = useState<GlobalStateType>({
@@ -36,6 +37,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 		loading: false,
 		report: null,
 		loadingChat: false,
+		chatHistory: []
 	});
 
 	const setGlobalState = (updatedState: Partial<GlobalStateType>) => {

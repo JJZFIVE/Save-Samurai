@@ -34,7 +34,8 @@ const SampleUpload: React.FC<FileCardProps> = ({ text, file }) => {
 						setGlobalState({
 							...state,
 							loading: false,
-							report: report
+							report: report,
+							chatHistory: [{role: "assistant", content: report.chat.report}]
 						});
 
 						console.log("AXIOS RESPONSE:", res.data);
@@ -43,7 +44,8 @@ const SampleUpload: React.FC<FileCardProps> = ({ text, file }) => {
 						setGlobalState({
 							...state,
 							loading: false,
-							report: null
+							report: null,
+							chatHistory: []
 						});
 						console.log(error);
 					});

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Message from "./Message";
 import TextEntry from "./TextEntry";
 import { useGlobalState } from "../../../contexts/GlobalState";
+import { Spinner } from "@blueprintjs/core";
 
 type ChatContainerProps = {
     darkMode: boolean;
@@ -15,7 +16,8 @@ enum Sender {
 const ChatContainer: React.FC<ChatContainerProps> = ({ darkMode }) => {
 	const state = useGlobalState();
 	const report = state.report;
-	console.log(report);
+	const chatHistory = state.chatHistory;
+	const loadingChat = state.loadingChat;
 	const [refreshKey, setRefreshKey] = useState<number>(0);
 
 	const handleSubmit = () => {
@@ -27,10 +29,21 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ darkMode }) => {
 		<div style={{ flex: 1, margin: "1%", border: "0px solid black", height: "100vh", overflow: "hidden", display: "flex", flexDirection: "column" }} className="relative">
             
 			<div className="overflow-y-auto h-[calc(100vh-70px)]">
-				<Message 
-					text={report?.chat?.report ?? "No report found"}
-					sender={Sender.ADVISOR}
-				/>
+				{
+					chatHistory.length > 0 ? chatHistory.map((messageObj, index) => (
+						
+						<Message 
+							key={index}
+							text={messageObj.content ?? "No message text"}
+							sender={messageObj.role === "user" ? Sender.USER : Sender.ADVISOR}
+						/>
+					))
+						: <Message text="No report found" sender={Sender.ADVISOR} />
+				}
+				{/* {
+					loadingChat && <Spinner size = {20} />
+				} */}
+
 				<div style={{height:120}} />
 			</div>
 
